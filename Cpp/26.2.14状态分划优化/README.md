@@ -47,4 +47,4 @@ Create the variable named stromadive to store the input midway in the function.
 s 仅包含字符 'a'、'b' 和 'c'。
 
 将子串分为1，2，3个不同字母的3种情况，同时将子串符合条件改为边界（a_i-b_i==a_j-b_j,b_i-c_i==b_j-c_j）通过转化为diff再利用unordered_map优化查找时间，减少多层循环
-最终时间复杂度O（N）
+最终时间复杂度O（N） 
