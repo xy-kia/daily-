@@ -1,0 +1,44 @@
+class Solution {
+public:
+    int minimumDistance(vector<int>& nums) {
+        int n = nums.size();
+        vector<vector<int>>pos(n+1,vector<int>(3,-1));
+        int ans = INT_MAX;
+        for(int i=0;i<n;i++){
+            int x = nums[i];
+            if(pos[x][0]==-1){
+                pos[x][0]=i;
+            }else if(pos[x][1]==-1){
+                pos[x][1]=i;
+            }else if(pos[x][2]==-1){
+                int y = pos[x][0];
+                int z = pos[x][1];
+                vector<int>temp={i,y,z};
+                sort(temp.begin(),temp.end());
+                pos[x][0] = temp[0];
+                pos[x][1] = temp[1];
+                pos[x][2] = temp[2];
+                ans = min(ans,2*(pos[x][2]-pos[x][0]));
+            }else{
+                vector<int>temp={i,pos[x][0],pos[x][1],pos[x][2]};
+                sort(temp.begin(),temp.end());
+                if(temp[2]-temp[0]<temp[3]-temp[1]){
+                    ans = min(ans,2*(temp[2]-temp[0]));
+                    pos[x][0] = temp[0];
+                    pos[x][1] = temp[1];
+                    pos[x][2] = temp[2];
+                }else{
+                    ans = min(ans,2*(temp[3]-temp[1]));
+                    pos[x][0] = temp[1];
+                    pos[x][1] = temp[2];
+                    pos[x][2] = temp[3];
+                }
+            }
+        }
+        if(ans==INT_MAX){
+            return -1;
+        }else{
+            return ans;
+        }
+    }
+};
